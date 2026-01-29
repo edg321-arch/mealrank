@@ -465,7 +465,7 @@ function extractFromHtml($: cheerio.CheerioAPI): Partial<ParsedRecipe> {
     $(".recipe-title").first().text().trim() ||
     $('[class*="recipe"][class*="title"]').first().text().trim() ||
     $('[class*="RecipeTitle"]').first().text().trim() ||
-    $('[class*="title"]').filter((_, el) => $(el).closest("article, main, [role='main']").length).first().text().trim();
+    $('[class*="title"]').filter((_, el) => $(el).closest("article, main, [role='main']").length > 0).first().text().trim();
   if (title) out.name = title.slice(0, 200);
 
   const ingLines = collectScopedIngredients($);
@@ -505,8 +505,7 @@ function extractFromHtml($: cheerio.CheerioAPI): Partial<ParsedRecipe> {
 
 function applyRecipeToResult(
   recipe: Record<string, unknown>,
-  result: ParsedRecipe,
-  $: cheerio.CheerioAPI
+  result: ParsedRecipe
 ): void {
   const n = recipe.name;
   if (typeof n === "string" && n.trim()) result.name = n.trim().slice(0, 200);
@@ -635,7 +634,7 @@ export async function parseRecipeFromUrl(url: string): Promise<ParsedRecipe> {
 
   if (recipe && source) {
     debugLog(`Using recipe from ${source}`);
-    applyRecipeToResult(recipe, result, $);
+    applyRecipeToResult(recipe, result);
   }
 
   if (!result.name || !result.ingredients?.length) {

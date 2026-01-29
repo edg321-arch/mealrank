@@ -5,16 +5,12 @@ import {
   ingredients,
   images,
   matchups,
-  type Meal,
-  type NewMeal,
   type NewIngredient,
   type NewImage,
-  type NewMatchup,
 } from "../shared/schema.js";
 import type { CreateMealInput, UpdateMealInput } from "../shared/validation.js";
 
 const K_FACTOR = 32;
-const STARTING_RATING = 1000;
 
 type SortBy = "date" | "rating" | "name";
 type SortDir = "asc" | "desc";
