@@ -32,7 +32,7 @@ api.get("/meals", async (req: Request, res: Response) => {
 });
 
 api.get("/meals/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id as string, 10);
   if (Number.isNaN(id)) {
     res.status(400).json({ error: "Invalid meal ID" });
     return;
@@ -46,7 +46,7 @@ api.get("/meals/:id", async (req: Request, res: Response) => {
 });
 
 api.get("/meals/:id/history", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id as string, 10);
   if (Number.isNaN(id)) {
     res.status(400).json({ error: "Invalid meal ID" });
     return;
@@ -71,7 +71,7 @@ api.post("/meals", async (req: Request, res: Response) => {
 });
 
 api.put("/meals/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id as string, 10);
   if (Number.isNaN(id)) {
     res.status(400).json({ error: "Invalid meal ID" });
     return;
@@ -91,7 +91,7 @@ api.put("/meals/:id", async (req: Request, res: Response) => {
 });
 
 api.delete("/meals/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id as string, 10);
   if (Number.isNaN(id)) {
     res.status(400).json({ error: "Invalid meal ID" });
     return;
@@ -171,7 +171,7 @@ api.post("/recipes/parse", async (req: Request, res: Response) => {
 
 // ---- Images ----
 api.get("/images/:id", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id as string, 10);
   if (Number.isNaN(id)) {
     res.status(400).json({ error: "Invalid image ID" });
     return;
